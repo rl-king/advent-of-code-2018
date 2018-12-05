@@ -4,7 +4,7 @@ module DayOne where
 main :: IO ()
 main = do
   i <- lines <$> readFile "dayOne.txt"
-  print $ part1 (read . f <$> i)
+  print $ part2 (read . f <$> i)
   where f ('+':xs) = xs
         f xs = xs
 
@@ -16,7 +16,7 @@ part1 =
 
 part2 :: [Int] -> Maybe Int
 part2 =
-  f (Nothing, []) . scanl1 (+) . concat . repeat
+  f (Nothing, []) . scanl1 (+) . cycle
   where f (Just x, _) _ = Just x
         f (_, acc) (x:xs)
           | x `elem` acc = f (Just x, acc) xs
